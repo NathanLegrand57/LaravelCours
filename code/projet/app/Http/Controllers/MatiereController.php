@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MatiereRequest;
 use App\Models\Matiere;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,7 @@ class MatiereController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MatiereRequest $request)
     {
         $data = $request->all();
 
@@ -65,7 +66,7 @@ class MatiereController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Matiere $matiere)
+    public function update(MatiereRequest $request, Matiere $matiere)
     {
         $data = $request->all();
 

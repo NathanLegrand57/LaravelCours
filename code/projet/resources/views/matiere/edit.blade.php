@@ -9,12 +9,18 @@
 
     <div>
       <label for="libelle">Libellé</label>
-      <input type="text" name="libelle" id="libelle" value="{{ $matiere->libelle }}" required maxlength="75">
+      <input type="text" name="libelle" id="libelle" value="{{ old('libelle', $matiere->libelle) }}" required maxlength="75">
+      @error('libelle')
+        <p class="text-danger">{{ $message }}</p>
+      @enderror
     </div>
 
     <div>
-      <label for="libelle">Niveau</label>
-      <input type="text" name="niveau" id="niveau" value="{{ $matiere->niveau }}" required maxlength="20">
+      <label for="niveau">Niveau</label>
+      <input type="text" name="niveau" id="niveau" value="{{ old('niveau', $matiere->niveau) }}" required maxlength="20">
+      @error('niveau')
+        <p class="text-danger">{{ $message }}</p>
+      @enderror
     </div>
 
     <div>

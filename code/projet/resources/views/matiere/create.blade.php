@@ -8,12 +8,12 @@
 
     <div>
       <label for="libelle">Libellé</label>
-      <input type="text" name="libelle" id="libelle" required maxlength="75">
+      <input type="text" name="libelle" id="libelle" value="{{ old('libelle') }}" required maxlength="75">
     </div>
 
     <div>
       <label for="libelle">Niveau</label>
-      <input type="text" name="niveau" id="niveau" required maxlength="20">
+      <input type="text" name="niveau" id="niveau" value="{{ old('niveau') }}" required maxlength="20">
     </div>
 
     <div>

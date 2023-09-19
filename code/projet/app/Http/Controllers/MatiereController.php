@@ -36,12 +36,14 @@ class MatiereController extends Controller
      */
     public function show(Matiere $matiere)
     {
-        $result = $matiere->libelle . ' (' . $matiere->niveau . ')';
+        // $result = $matiere->libelle . ' (' . $matiere->niveau . ')';
 
-        foreach ($matiere->professeurs as $professeur) {
-            $result .= '[' . $professeur->nom . ']';
-        }
-        return $result;
+        // foreach ($matiere->professeurs as $professeur) {
+        //     $result .= '[' . $professeur->nom . ']';
+        // }
+        // return $result;
+
+        return view('matiere.show', compact('matiere'));
     }
 
     /**

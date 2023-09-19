@@ -11,4 +11,11 @@ class Professeur extends Model
     public function matiere(){
         return $this->belongsTo(Matiere::class);
     }
+
+    function identite(bool $prenom_en_premier = true) : string {
+
+        return $prenom_en_premier
+        ? $this->prenom . ' ' . $this->nom
+        : $this->nom . ' ' . $this->prenom;
+    }
 }

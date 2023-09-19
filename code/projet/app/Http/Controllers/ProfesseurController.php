@@ -36,8 +36,9 @@ class ProfesseurController extends Controller
      */
     public function show(Professeur $professeur)
     {
-        return($professeur->nom . ' ' . $professeur->prenom . '//' . $professeur->matiere->libelle);
-
+        // return view('professeur.show', compact('professeur'));
+        return view('professeur.show', ['professeur' => $professeur]);
+        // return($professeur->nom . ' ' . $professeur->prenom . '//' . $professeur->matiere->libelle);
     }
 
     /**

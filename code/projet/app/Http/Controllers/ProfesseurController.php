@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Professeur;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProfesseurController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        dd(Professeur::all());
+        //
     }
 
     /**
@@ -36,9 +42,13 @@ class ProfesseurController extends Controller
      */
     public function show(Professeur $professeur)
     {
-        // return view('professeur.show', compact('professeur'));
-        return view('professeur.show', ['professeur' => $professeur]);
-        // return($professeur->nom . ' ' . $professeur->prenom . '//' . $professeur->matiere->libelle);
+        $date = Carbon::parse($professeur->date_entree);
+        $retraite = false;
+        if ($date->year < 1980) {
+            $retraite = true;
+        }
+
+        return view('professeur.show', compact('professeur', 'retraite'));
     }
 
     /**
@@ -64,5 +74,12 @@ class ProfesseurController extends Controller
     {
         //
     }
-}
 
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function undelete(Professeur $professeur)
+    {
+        //
+    }
+}

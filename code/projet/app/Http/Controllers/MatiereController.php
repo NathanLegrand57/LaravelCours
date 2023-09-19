@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 
 class MatiereController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $matieres = Matiere::all();
+        return view('matiere.index', compact('matieres'));
     }
 
     /**
@@ -20,7 +26,7 @@ class MatiereController extends Controller
      */
     public function create()
     {
-        //
+        return view('matiere.create');
     }
 
     /**
@@ -28,7 +34,16 @@ class MatiereController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $matiere = new Matiere();
+
+        $matiere->libelle = $data['libelle'];
+        $matiere->niveau = $data['niveau'];
+
+        $matiere->save();
+
+        return redirect()->route('matiere.index');
     }
 
     /**
@@ -36,13 +51,6 @@ class MatiereController extends Controller
      */
     public function show(Matiere $matiere)
     {
-        // $result = $matiere->libelle . ' (' . $matiere->niveau . ')';
-
-        // foreach ($matiere->professeurs as $professeur) {
-        //     $result .= '[' . $professeur->nom . ']';
-        // }
-        // return $result;
-
         return view('matiere.show', compact('matiere'));
     }
 
@@ -51,6 +59,7 @@ class MatiereController extends Controller
      */
     public function edit(Matiere $matiere)
     {
+        return view('matiere.edit', compact('matiere'));
     }
 
     /**
@@ -58,13 +67,28 @@ class MatiereController extends Controller
      */
     public function update(Request $request, Matiere $matiere)
     {
-        //
+        $data = $request->all();
+
+        $matiere->libelle = $data['libelle'];
+        $matiere->niveau = $data['niveau'];
+
+        $matiere->save();
+
+        return redirect()->route('matiere.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Matiere $matiere)
+    {
+        //
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function undelete(Matiere $matiere)
     {
         //
     }

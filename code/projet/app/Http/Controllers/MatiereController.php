@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\MatiereRepository;
 use App\Http\Requests\MatiereRequest;
 use App\Models\Matiere;
 use Auth;
@@ -9,8 +10,11 @@ use Illuminate\Http\Request;
 
 class MatiereController extends Controller
 {
-    public function __construct()
+    private $repository;
+
+    public function __construct(MatiereRepository $repository)
     {
+        $this->repository = $repository;
         $this->middleware('auth')->except(['index', 'show']);
     }
 
@@ -19,7 +23,7 @@ class MatiereController extends Controller
      */
     public function index()
     {
-        $matieres = Matiere::all();
+        $matieres = $this->repository->getData();
         return view('matiere.index', compact('matieres'));
     }
 
@@ -29,7 +33,7 @@ class MatiereController extends Controller
     public function create()
     {
         if (Auth::user()->can('matiere-create')) {
-        return view('matiere.create');
+            return view('matiere.create');
         }
 
         abort(401);
@@ -40,14 +44,7 @@ class MatiereController extends Controller
      */
     public function store(MatiereRequest $request)
     {
-        $data = $request->all();
-
-        $matiere = new Matiere();
-
-        $matiere->libelle = $data['libelle'];
-        $matiere->niveau = $data['niveau'];
-
-        $matiere->save();
+        $this->repository->store($request->all());
 
         return redirect()->route('matiere.index');
     }
@@ -77,12 +74,7 @@ class MatiereController extends Controller
      */
     public function update(MatiereRequest $request, Matiere $matiere)
     {
-        $data = $request->all();
-
-        $matiere->libelle = $data['libelle'];
-        $matiere->niveau = $data['niveau'];
-
-        $matiere->save();
+        $this->repository->update($matiere, $request->all());
 
         return redirect()->route('matiere.index');
     }

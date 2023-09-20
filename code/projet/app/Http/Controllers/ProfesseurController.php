@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\ProfesseurRepository;
 use App\Http\Requests\ProfesseurRequest;
 use App\Models\Matiere;
 use App\Models\Professeur;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class ProfesseurController extends Controller
 {
-    public function __construct()
+    private $repository;
+
+    public function __construct(ProfesseurRepository $repository)
     {
+        $this->repository = $repository;
         $this->middleware('auth')->except(['index', 'show']);
     }
 
@@ -40,16 +43,7 @@ class ProfesseurController extends Controller
      */
     public function store(ProfesseurRequest $request)
     {
-        $data = $request->all();
-
-        $professeur = new Professeur();
-
-        $professeur->nom = $data['nom'];
-        $professeur->prenom = $data['prenom'];
-        $professeur->date_entree = $data['date_entree'];
-        $professeur->matiere_id = $data['matiere_id'];
-
-        $professeur->save();
+        $this->repository->store($request->all());
 
         return redirect()->route('professeur.index');
     }
@@ -83,14 +77,7 @@ class ProfesseurController extends Controller
      */
     public function update(ProfesseurRequest $request, Professeur $professeur)
     {
-        $data = $request->all();
-
-        $professeur->nom = $data['nom'];
-        $professeur->prenom = $data['prenom'];
-        $professeur->date_entree = $data['date_entree'];
-        $professeur->matiere_id = $data['matiere_id'];
-
-        $professeur->save();
+        $this->repository->update($professeur, $request->all());
 
         return redirect()->route('professeur.index');
     }

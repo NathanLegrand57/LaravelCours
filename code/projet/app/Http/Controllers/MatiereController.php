@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MatiereRequest;
 use App\Models\Matiere;
+use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class MatiereController extends Controller
 {
@@ -29,8 +29,10 @@ class MatiereController extends Controller
     public function create()
     {
         if (Auth::user()->can('matiere-create')) {
-            return view('matiere.create');
+        return view('matiere.create');
         }
+
+        abort(401);
     }
 
     /**
@@ -66,6 +68,8 @@ class MatiereController extends Controller
         if (Auth::user()->can('matiere-update')) {
             return view('matiere.edit', compact('matiere'));
         }
+
+        abort(401);
     }
 
     /**

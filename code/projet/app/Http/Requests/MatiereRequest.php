@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Auth;
+
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class MatiereRequest extends FormRequest
 {
@@ -15,7 +16,7 @@ class MatiereRequest extends FormRequest
         $user = Auth::user();
 
         return Auth::check() &&
-            ($user->isA('Admin') || $user->can('matiere-create') || $user->can('matiere-retrieve'));
+            ($user->isA('admin') || $user->can('matiere-create') || $user->can('matiere-update'));
     }
 
     /**

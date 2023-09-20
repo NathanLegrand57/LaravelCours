@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-  <a href="{{ route('matiere.create') }}" class="btn btn-primary">Ajouter</a>
+  @can('matiere-create')
+    <a href="{{ route('matiere.create') }}" class="btn btn-primary">Ajouter</a>
+  @endcan
+
   <ul>
     @forelse ($matieres as $matiere)
       <li>
         <div class="mb-2">
           {{ $matiere->libelle }} [{{ $matiere->niveau }}]
-          @auth
+          @cannot('matiere-update')
             <a href="{{ route('matiere.edit', ['matiere' => $matiere->id]) }}" class="btn btn-sm btn-warning">Modifier</a>
-          @endauth
+          @endcannot
         </div>
       </li>
     @empty

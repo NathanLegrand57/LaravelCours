@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class ProfesseurRequest extends FormRequest
 {
@@ -15,7 +15,8 @@ class ProfesseurRequest extends FormRequest
         $user = Auth::user();
 
         return Auth::check() &&
-            ($user->isA('Admin') || $user->can('matiere-create') || $user->can('matiere-retrieve'));
+            ($user->isA('admin') || $user->can('professeur-create') || $user->can('professeur-update'));
+
     }
 
     /**

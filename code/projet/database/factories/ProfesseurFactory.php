@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Matiere;
-use App\Models\Professeur;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -11,13 +10,17 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProfesseurFactory extends Factory
 {
-    protected $model = Professeur::class;
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
-            'nom'=>fake()->name(50),
-            'prenom'=>fake()->name(50),
-            'date_entree'=>fake()->date(),
+            'nom' => fake()->lastName,
+            'prenom' => fake()->firstName,
+            'date_entree' => fake()->date(),
             'matiere_id' => Matiere::factory()->create()
         ];
     }

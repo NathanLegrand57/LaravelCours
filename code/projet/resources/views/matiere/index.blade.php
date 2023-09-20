@@ -5,11 +5,11 @@
   <ul>
     @forelse ($matieres as $matiere)
       <li>
-        <div>
+        <div class="mb-2">
           {{ $matiere->libelle }} [{{ $matiere->niveau }}]
-        </div>
-        <div>
-          <a href="{{ route('matiere.edit', ['matiere' => $matiere->id]) }}">Modifier</a>
+          @auth
+            <a href="{{ route('matiere.edit', ['matiere' => $matiere->id]) }}" class="btn btn-sm btn-warning">Modifier</a>
+          @endauth
         </div>
       </li>
     @empty

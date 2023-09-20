@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Matiere;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,12 +9,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MatiereFactory extends Factory
 {
-    protected $model = Matiere::class;
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
-            'libellé' => fake()->name(50), #Possible d'utiliser $this->faker->name ou fake()->name()
-            'niveau' => 10,
+            'libelle' => fake()->words(3, true),
+            'niveau' => fake()->word()
         ];
     }
 }

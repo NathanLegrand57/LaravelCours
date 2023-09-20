@@ -7,9 +7,9 @@
       <li>
         <div>
           {{ $professeur->identite() }}
-        </div>
-        <div>
-          <a href="{{ route('professeur.edit', ['professeur' => $professeur->id]) }}">Modifier</a>
+          @auth
+            <a href="{{ route('professeur.edit', ['professeur' => $professeur->id]) }}" class="btn btn-sm btn-warning">Modifier</a>
+          @endauth
         </div>
       </li>
     @empty

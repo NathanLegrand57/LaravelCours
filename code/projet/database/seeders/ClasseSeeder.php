@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Classe;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class ClasseSeeder extends Seeder
 {
@@ -12,8 +13,8 @@ class ClasseSeeder extends Seeder
      */
     public function run(): void
     {
-        Classe::factory() #Ne pas oublier d'indiquer le chemin de la classe "Classe" (en l'occurence) avec use... Bien utiliser "Classe" et non "ClasseSeeder" ou "ClasseFactory" car elle est la seule qui possède "HasFactory".
-            ->count(5)
+        Classe::factory()
+            ->count(10)
             ->create();
     }
 }

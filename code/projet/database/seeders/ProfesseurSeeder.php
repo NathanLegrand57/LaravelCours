@@ -13,8 +13,8 @@ class ProfesseurSeeder extends Seeder
      */
     public function run(): void
     {
-        Professeur::factory() #Ne pas oublier d'indiquer le chemin de la classe "Classe" (en l'occurence) avec use... Bien utiliser "Classe" et non "ClasseSeeder" ou "ClasseFactory" car elle est la seule qui possède "HasFactory".
-            ->count(5)
+        Professeur::factory()
+            ->count(20)
             ->create();
     }
 }

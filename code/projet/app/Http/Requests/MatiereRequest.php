@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MatiereRequest extends FormRequest
@@ -11,7 +12,10 @@ class MatiereRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = Auth::user();
+
+        return Auth::check() &&
+            ($user->isA('Admin') || $user->can('matiere-create') || $user->can('matiere-retrieve'));
     }
 
     /**
@@ -22,8 +26,8 @@ class MatiereRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'libelle'=>'required|string|max:75',
-            'niveau'=>'required|numeric'
+            'libelle' => 'required|string|max:75',
+            'niveau' => 'required|numeric'
         ];
     }
 }

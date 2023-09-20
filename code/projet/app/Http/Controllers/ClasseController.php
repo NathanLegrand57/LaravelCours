@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ClasseController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -21,16 +26,16 @@ class ClasseController extends Controller
     public function create()
     {
         $classe = new Classe();
+
         $classe->batiment = 'Bâtiment A';
-        $classe->prenom = 'Patrick';
-        $classe->numero = '123';
-        $classe->nombre_places = '321';
+        $classe->numero = '45';
+        $classe->nombre_places = 455;
+        $classe->is_ouverte = true;
 
         $classe->save();
 
-        // return redirect()->route('classe.index'); # classe.index se voit dans le cmd avec artisant route:list
-
-
+        return $this->index();
+        // return redirect()->route('classe.index');
     }
 
     /**
@@ -46,7 +51,7 @@ class ClasseController extends Controller
      */
     public function show(Classe $classe)
     {
-        dd($classe->numero); # Permet de montrer les informations correspondantes à l'id dans la bdd (ici avec ->prenom ne montre que le prénomcorrespondant à l'id)
+        dd($classe->updated_at);
     }
 
     /**
@@ -54,9 +59,13 @@ class ClasseController extends Controller
      */
     public function edit(Classe $classe)
     {
-        $classe->prenom = 'Edit';
+        $classe->is_ouverte = !$classe->is_ouverte;
+
         $classe->save();
-        dd($classe->prenom);
+
+        dump($classe->is_ouverte);
+        dd($classe->updated_at);
+        // return redirect()->route('classe.show', ['classe' => $classe->id]);
     }
 
     /**
@@ -64,12 +73,7 @@ class ClasseController extends Controller
      */
     public function update(Request $request, Classe $classe)
     {
-        // $classe->batiment = 'Bâtiment A';
-        // $classe->prenom = 'Patrick';
-        // $classe->numero = '123';
-        // $classe->nombre_places = '321';
-
-        // $classe->save();
+        //
     }
 
     /**
@@ -80,9 +84,20 @@ class ClasseController extends Controller
         //
     }
 
-    // function toto(Classe $classe) {
-    //     $classe->nombre_places +=2;
-    //     dd($classe->nombre_places);
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function undelete(Classe $classe)
+    {
+        //
+    }
 
-    // }
+    function toto(Classe $classe)
+    {
+        $classe->nombre_places += 2;
+
+        $classe->save();
+
+        dd($classe->nombre_places);
+    }
 }

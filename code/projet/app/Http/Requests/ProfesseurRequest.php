@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProfesseurRequest extends FormRequest
 {
@@ -11,7 +12,10 @@ class ProfesseurRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = Auth::user();
+
+        return Auth::check() &&
+            ($user->isA('Admin') || $user->can('matiere-create') || $user->can('matiere-retrieve'));
     }
 
     /**

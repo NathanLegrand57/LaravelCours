@@ -9,7 +9,8 @@ class Matiere extends Model
 {
     use HasFactory;
 
-    public function professeurs() {
+    function professeurs()
+    {
         return $this->hasMany(Professeur::class);
     }
 }

@@ -13,8 +13,8 @@ class MatiereSeeder extends Seeder
      */
     public function run(): void
     {
-        Matiere::factory() #Ne pas oublier d'indiquer le chemin de la classe "Classe" (en l'occurence) avec use... Bien utiliser "Classe" et non "ClasseSeeder" ou "ClasseFactory" car elle est la seule qui possède "HasFactory".
-            ->count(5)
+        Matiere::factory()
+            ->count(10)
             ->create();
     }
 }

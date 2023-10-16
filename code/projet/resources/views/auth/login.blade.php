@@ -7,6 +7,7 @@
 
         <!-- Email Address -->
         <div>
+            <p>{{ __('Are you sure you want to delete your account?')}} </p>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />

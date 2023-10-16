@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class MatiereController extends Controller
 {
-
     private $repository;
 
     public function __construct(MatiereRepository $repository)
@@ -26,9 +25,6 @@ class MatiereController extends Controller
     {
         $matieres = $this->repository->getData();
         return view('matiere.index', compact('matieres'));
-
-        $dataCached = $this->repository->getDataCached();
-        return view('/', compact('data', 'dataCached'));
     }
 
     /**

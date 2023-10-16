@@ -3,8 +3,6 @@
 @section('content')
   @can('matiere-create')
     <a href="{{ route('matiere.create') }}" class="btn btn-primary">Ajouter</a>
-    <a href="locale/en">English</a>
-    <a href="locale/fr">Français</a>
   @endcan
 
   <ul>

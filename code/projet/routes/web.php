@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfesseurController;
@@ -38,6 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php'; # Enlever la dernière guillemet plus ";" si erreur
+Route::get('language/{code_iso}', [LanguageController::class, 'change'])->name('language.change');
 
-
+require __DIR__.'/auth.php';

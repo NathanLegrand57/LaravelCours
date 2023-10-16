@@ -16,17 +16,23 @@
 <body>
   <div class="container">
     <nav class="pb-5">
-      <a href="{{ route('matiere.index') }}">Listes des matières</a>
-      <a href="{{ route('professeur.index') }}">Listes des professeurs</a>
+      <div>
+        <a href="{{ route('matiere.index') }}">{{ __('Listes des matières') }}</a>
+        <a href="{{ route('professeur.index') }}">{{ __('Listes des professeurs') }}</a>
+      </div>
+      <div>
+        {{ __('Vous naviguez en') }} [{{ session('locale') }}] [{{ App::getLocale() }}]
+        <a href="{{ route('language.change', ['code_iso' => 'fr']) }}">{{ __('French') }}</a>
+        <a href="{{ route('language.change', ['code_iso' => 'en']) }}">{{ __('English') }}</a>
+      </div>
       <form method="POST" action="{{ route('logout') }}">
         @csrf
 
-        <x-dropdown-link :href="route('logout')"
-                onclick="event.preventDefault();
+        <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                             this.closest('form').submit();">
-            {{ __('Log Out') }}
+          {{ __('Log Out') }}
         </x-dropdown-link>
-    </form>
+      </form>
     </nav>
     @yield('content')
   </div>
